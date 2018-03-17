@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion app.sdk.compile
+
+    defaultConfig {
+        applicationId "de.florianm.android.routetracker"
+        minSdkVersion app.sdk.min
+        targetSdkVersion app.sdk.target
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('../debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.debug.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation Deps.kotlinStdLibJre8
+    implementation Deps.supportAppCompatV7
+    implementation Deps.supportConstraintLayout
+
+    implementation(Deps.googlePlaySdk) {
+        exclude 'group': 'com.android.support'
+    }
+
+    implementation Deps.androidArchRoom
+    kapt Deps.androidArchRoomCompiler
+
+    implementation Deps.dagger
+    kapt Deps.daggerCompiler
+
+    implementation(Deps.mosby3Mvi) {
+        exclude 'group': 'com.android.support'
+    }
+
+    testImplementation Deps.junit
+    androidTestImplementation Deps.androidTestRunner
+    androidTestImplementation Deps.androidTestEspresso
+}
