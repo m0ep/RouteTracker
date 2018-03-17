@@ -51,16 +51,16 @@ android {
 }
 
 dependencies {
+    implementation project(':db')
+
     implementation Deps.kotlinStdLibJre8
+
     implementation Deps.supportAppCompatV7
     implementation Deps.supportConstraintLayout
 
     implementation(Deps.googlePlaySdk) {
         exclude 'group': 'com.android.support'
     }
-
-    implementation Deps.androidArchRoom
-    kapt Deps.androidArchRoomCompiler
 
     implementation Deps.dagger
     kapt Deps.daggerCompiler
@@ -72,4 +72,5 @@ dependencies {
     testImplementation Deps.junit
     androidTestImplementation Deps.androidTestRunner
     androidTestImplementation Deps.androidTestEspresso
+
 }

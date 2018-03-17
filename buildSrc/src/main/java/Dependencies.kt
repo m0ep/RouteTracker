@@ -12,9 +12,11 @@ object Versions {
     const val junit = "4.12"
     const val androidTestRunner = "1.0.1"
     const val androidTestEspresso = "3.0.1"
+    const val threeTenABP = "1.0.5"
 }
 
 object Deps {
+    const val kotlinStdLibJre7 = "org.jetbrains.kotlin:kotlin-stdlib-jre7:${Versions.kotlin}"
     const val kotlinStdLibJre8 = "org.jetbrains.kotlin:kotlin-stdlib-jre8:${Versions.kotlin}"
     const val supportAppCompatV7 = "com.android.support:appcompat-v7:${Versions.androidSupportLib}"
     const val supportConstraintLayout = "com.android.support.constraint:constraint-layout:${Versions.androidConstraintLayout}"
@@ -27,4 +29,5 @@ object Deps {
     const val junit = "junit:junit:${Versions.junit}"
     const val androidTestRunner = "com.android.support.test:runner:${Versions.androidTestRunner}"
     const val androidTestEspresso = "com.android.support.test.espresso:espresso-core:${Versions.androidTestEspresso}"
+    const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
 }

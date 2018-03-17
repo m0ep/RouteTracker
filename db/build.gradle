@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion app.sdk.compile
+
+    defaultConfig {
+        minSdkVersion app.sdk.min
+        targetSdkVersion app.sdk.target
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+
+    implementation Deps.kotlinStdLibJre7
+    implementation Deps.supportAppCompatV7
+
+    api Deps.androidArchRoom
+    kapt Deps.androidArchRoomCompiler
+
+    api Deps.threeTenABP
+
+    testImplementation Deps.junit
+    androidTestImplementation Deps.androidTestRunner
+    androidTestImplementation Deps.androidTestEspresso
+}
