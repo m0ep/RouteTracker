@@ -5,11 +5,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion app.sdk.compile
+    compileSdkVersion  Versions.androidCompileSdk
 
     defaultConfig {
-        minSdkVersion app.sdk.min
-        targetSdkVersion app.sdk.target
+        minSdkVersion Versions.androidMinSdk
+        targetSdkVersion  Versions.androidTargetSdk
         versionCode 1
         versionName "1.0"
 
@@ -38,7 +38,7 @@ android {
 dependencies {
 
     implementation Deps.kotlinStdLibJre7
-    implementation Deps.supportAppCompatV7
+    implementation Deps.androidSupportAppCompatV7
 
     api Deps.androidArchRoom
     kapt Deps.androidArchRoomCompiler

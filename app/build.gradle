@@ -5,21 +5,15 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion app.sdk.compile
+    compileSdkVersion  Versions.androidCompileSdk
 
     defaultConfig {
         applicationId "de.florianm.android.routetracker"
-        minSdkVersion app.sdk.min
-        targetSdkVersion app.sdk.target
+        minSdkVersion  Versions.androidMinSdk
+        targetSdkVersion  Versions.androidTargetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
-            }
-        }
     }
 
     signingConfigs {
@@ -55,8 +49,8 @@ dependencies {
 
     implementation Deps.kotlinStdLibJre8
 
-    implementation Deps.supportAppCompatV7
-    implementation Deps.supportConstraintLayout
+    implementation Deps.androidSupportAppCompatV7
+    implementation Deps.androidSupportConstraintLayout
 
     implementation(Deps.googlePlaySdk) {
         exclude 'group': 'com.android.support'
@@ -72,5 +66,4 @@ dependencies {
     testImplementation Deps.junit
     androidTestImplementation Deps.androidTestRunner
     androidTestImplementation Deps.androidTestEspresso
-
 }
