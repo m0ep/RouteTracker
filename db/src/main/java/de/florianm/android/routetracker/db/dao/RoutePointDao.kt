@@ -10,6 +10,6 @@ abstract class RoutePointDao {
     @Insert
     abstract fun insert(routePoint: RoutePoint)
 
-    @Query("SELECT * FROM RoutePoint ORDER BY id DESC LIMIT 1")
-    abstract fun getLast(): RoutePoint?
+    @Query("SELECT * FROM RoutePoint WHERE track_id=:trackId ORDER BY id DESC LIMIT 1")
+    abstract fun getLast(trackId: Long): RoutePoint?
 }
