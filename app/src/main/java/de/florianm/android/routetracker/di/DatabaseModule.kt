@@ -20,4 +20,8 @@ class DatabaseModule {
     @Provides
     fun providesRoutePointDao(appDatabase: AppDatabase) =
             appDatabase.routePointDao()
+
+    @Provides
+    fun providesRouteSegmentDao(appDatabase: AppDatabase) =
+            appDatabase.routeSegmentDao();
 }

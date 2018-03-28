@@ -7,14 +7,14 @@ import android.arch.persistence.room.PrimaryKey
 import org.threeten.bp.Duration
 import org.threeten.bp.OffsetDateTime
 
-@Entity(tableName = "RouteTrack",
+@Entity(tableName = "RouteSegment",
         foreignKeys = [(ForeignKey(
-                entity = RouteTrack::class,
+                entity = RouteSegment::class,
                 parentColumns = ["id"],
                 childColumns = ["next_track_id"],
                 onDelete = ForeignKey.CASCADE))]
 )
-data class RouteTrack(
+data class RouteSegment(
         @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) val id: Long,
         @ColumnInfo(name = "created_at") val createdAt: OffsetDateTime,
         @ColumnInfo(name = "next_track_id") val nextTrackId: Long,

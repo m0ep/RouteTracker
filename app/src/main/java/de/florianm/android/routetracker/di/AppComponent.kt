@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.Component
 import de.florianm.android.routetracker.db.dao.RoutePointDao
+import de.florianm.android.routetracker.db.dao.RouteSegmentDao
 import javax.inject.Singleton
 
 @Singleton
@@ -15,5 +16,6 @@ interface AppComponent {
 
     fun context(): Context
     fun routePointDao(): RoutePointDao
+    fun routeSegmentDao(): RouteSegmentDao
     fun preferences(): SharedPreferences
 }

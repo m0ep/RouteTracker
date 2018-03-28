@@ -8,10 +8,10 @@ object Versions {
     const val androidTargetSdk = 27
 
     // Kotlin
-    const val kotlin = "1.2.30"
+    const val kotlin = "1.2.31"
 
     // Android Libraries
-    const val androidGradlePlugin = "3.0.1"
+    const val androidGradlePlugin = "3.1.0"
     const val androidSupportLib = "27.1.0"
     const val androidSupportConstraintLayout = "1.0.2"
     const val androidArchRoom = "1.0.0"
