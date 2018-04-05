@@ -52,7 +52,11 @@ dependencies {
     implementation Deps.androidSupportAppCompatV7
     implementation Deps.androidSupportConstraintLayout
 
-    implementation(Deps.googlePlaySdk) {
+    implementation(Deps.googlePlaySdkMaps) {
+        exclude 'group': 'com.android.support'
+    }
+
+    implementation(Deps.googlePlaySdkLocation) {
         exclude 'group': 'com.android.support'
     }
 

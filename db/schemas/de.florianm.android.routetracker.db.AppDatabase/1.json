@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "e25988630f50fadcd288e0d01fd67a30",
+    "identityHash": "628e4edeb824504f85691941fb9160d7",
     "entities": [
       {
         "tableName": "RoutePoint",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created_at` TEXT NOT NULL, `track_id` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `accuracy` REAL, `altitude` REAL, `bearing` REAL, `speed` REAL, `provider` TEXT, FOREIGN KEY(`track_id`) REFERENCES `RouteTrack`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created_at` TEXT NOT NULL, `segment_id` INTEGER NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `accuracy` REAL, `altitude` REAL, `bearing` REAL, `speed` REAL, `provider` TEXT, FOREIGN KEY(`segment_id`) REFERENCES `RouteSegment`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -21,8 +21,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "trackId",
-            "columnName": "track_id",
+            "fieldPath": "segmentId",
+            "columnName": "segment_id",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -77,21 +77,21 @@
         },
         "indices": [
           {
-            "name": "idx_point_track_id",
+            "name": "idx_point_segment_id",
             "unique": false,
             "columnNames": [
-              "track_id"
+              "segment_id"
             ],
-            "createSql": "CREATE  INDEX `idx_point_track_id` ON `${TABLE_NAME}` (`track_id`)"
+            "createSql": "CREATE  INDEX `idx_point_segment_id` ON `${TABLE_NAME}` (`segment_id`)"
           }
         ],
         "foreignKeys": [
           {
-            "table": "RouteTrack",
+            "table": "RouteSegment",
             "onDelete": "CASCADE",
             "onUpdate": "NO ACTION",
             "columns": [
-              "track_id"
+              "segment_id"
             ],
             "referencedColumns": [
               "id"
@@ -100,8 +100,8 @@
         ]
       },
       {
-        "tableName": "RouteTrack",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created_at` TEXT NOT NULL, `next_track_id` INTEGER NOT NULL, `update_distance` REAL, `update_interval` INTEGER NOT NULL, `total_track_distance` REAL NOT NULL, FOREIGN KEY(`next_track_id`) REFERENCES `RouteTrack`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "tableName": "RouteSegment",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created_at` TEXT NOT NULL, `route_id` INTEGER NOT NULL, `total_distance` REAL NOT NULL, `jsonData` TEXT NOT NULL, FOREIGN KEY(`route_id`) REFERENCES `Route`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id",
@@ -116,26 +116,79 @@
             "notNull": true
           },
           {
-            "fieldPath": "nextTrackId",
-            "columnName": "next_track_id",
+            "fieldPath": "routeId",
+            "columnName": "route_id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "updateDistance",
-            "columnName": "update_distance",
+            "fieldPath": "totalDistance",
+            "columnName": "total_distance",
             "affinity": "REAL",
-            "notNull": false
+            "notNull": true
           },
           {
-            "fieldPath": "updateInterval",
-            "columnName": "update_interval",
+            "fieldPath": "jsonData",
+            "columnName": "jsonData",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "idx_segment_route_id",
+            "unique": false,
+            "columnNames": [
+              "route_id"
+            ],
+            "createSql": "CREATE  INDEX `idx_segment_route_id` ON `${TABLE_NAME}` (`route_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "Route",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "route_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "Route",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `created_at` TEXT NOT NULL, `name` TEXT NOT NULL, `total_distance` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
             "affinity": "INTEGER",
             "notNull": true
           },
           {
-            "fieldPath": "totalTrackDistance",
-            "columnName": "total_track_distance",
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "totalDistance",
+            "columnName": "total_distance",
             "affinity": "REAL",
             "notNull": true
           }
@@ -147,24 +200,12 @@
           "autoGenerate": true
         },
         "indices": [],
-        "foreignKeys": [
-          {
-            "table": "RouteTrack",
-            "onDelete": "CASCADE",
-            "onUpdate": "NO ACTION",
-            "columns": [
-              "next_track_id"
-            ],
-            "referencedColumns": [
-              "id"
-            ]
-          }
-        ]
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"e25988630f50fadcd288e0d01fd67a30\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"628e4edeb824504f85691941fb9160d7\")"
     ]
   }
 }

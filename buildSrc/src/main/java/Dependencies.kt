@@ -24,6 +24,9 @@ object Versions {
     const val mosby3Mvi = "3.1.0"
     const val junit = "4.12"
     const val threeTenABP = "1.0.5"
+    const val slf4j = "1.7.25"
+    const val slf4jTimber = "1.0.0"
+    const val timber = "4.7.0"
 }
 
 /**
@@ -45,10 +48,15 @@ object Deps {
     const val androidTestEspresso = "com.android.support.test.espresso:espresso-core:${Versions.androidTestEspresso}"
 
     // 3rd party
-    const val googlePlaySdk = "com.google.android.gms:play-services-maps:${Versions.googlePlaySdk}"
+    const val googlePlaySdkMaps = "com.google.android.gms:play-services-maps:${Versions.googlePlaySdk}"
+    const val googlePlaySdkLocation = "com.google.android.gms:play-services-location:${Versions.googlePlaySdk}"
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     const val mosby3Mvi = "com.hannesdorfmann.mosby3:mvi:${Versions.mosby3Mvi}"
     const val junit = "junit:junit:${Versions.junit}"
     const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
+
+    const val slf4jApi = "org.slf4j:slf4j-api:${Versions.slf4j}"
+    const val slf4jTimber = "at.favre.lib:slf4j-timber:${Versions.slf4jTimber}"
+    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 }

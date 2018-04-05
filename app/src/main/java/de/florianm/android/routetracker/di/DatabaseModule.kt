@@ -23,5 +23,9 @@ class DatabaseModule {
 
     @Provides
     fun providesRouteSegmentDao(appDatabase: AppDatabase) =
-            appDatabase.routeSegmentDao();
+            appDatabase.routeSegmentDao()
+
+    @Provides
+    fun providesRouteDao(appDatabase: AppDatabase) =
+            appDatabase.routeDao()
 }
